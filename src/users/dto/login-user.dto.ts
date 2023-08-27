@@ -1,6 +1,6 @@
 import { IsEmail, IsString, Matches, MaxLength, MinLength } from "class-validator";
 
-export class CreateUserDto {
+export class LoginUserDto {
   @IsString()
   @MinLength(6)
   @MaxLength(12)
