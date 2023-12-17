@@ -25,7 +25,7 @@ export class UsersService {
 
       return {
         ...user,
-        token: this.getJwtToken({ email: user.email })
+        token: this.getJwtToken({ id: user.id })
       };
     } catch (error) {
       this.handleDBErrors(error);
@@ -35,7 +35,7 @@ export class UsersService {
   async login(loginUserDto: LoginUserDto) {
     const { password, email } = loginUserDto;
 
-    const user = await this.userRepository.findOne({ where: { email }, select: { email: true, password: true } });
+    const user = await this.userRepository.findOne({ where: { email }, select: { email: true, password: true, id: true } });
 
     if (!user) throw new UnauthorizedException('Invalid credentials');
 
@@ -43,7 +43,7 @@ export class UsersService {
 
     return {
       ...user,
-      token: this.getJwtToken({ email: user.email })
+      token: this.getJwtToken({ id: user.id })
     };
 
   }
